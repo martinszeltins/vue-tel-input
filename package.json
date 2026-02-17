@@ -1,6 +1,6 @@
 {
   "name": "@martinszeltins/vue-tel-input",
-  "version": "5.16.0",
+  "version": "5.16.1",
   "description": "International Telephone Input with Vue",
   "author": "Martins Zeltins",
   "license": "MIT",
