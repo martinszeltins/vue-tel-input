@@ -1,43 +1,31 @@
-<p align="center">
-<img width="100" alt="vue-tel-input-logo" src="https://iamstevendao.github.io/vue-tel-input/hero.png"/>
-</p>
-
-# vue-tel-input
+# @martinszeltins/vue-tel-input
 
 International Telephone Input with Vue.
 
-[![npm](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![stars](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
+[![npm](https://img.shields.io/npm/dt/@martinszeltins/vue-tel-input.svg)](https://www.npmjs.com/package/@martinszeltins/vue-tel-input) [![stars](https://img.shields.io/github/stars/martinszeltins/vue-tel-input.svg)](https://github.com/martinszeltins/vue-tel-input)
 
 <p align="center">
 <img width="600" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
-## Documentation and Demo
-
-[Visit the website](https://iamstevendao.github.io/vue-tel-input/)
-
-## Vue 3 Support
-
-`vue-tel-input@next`: [Guide](https://iamstevendao.github.io/vue-tel-input/documentation/next.html)
-
 ## Changelog
 
-[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
+[Go to Github Releases](https://github.com/martinszeltins/vue-tel-input/releases)
 
 ## Getting started
 
 - Install the plugin:
 
   ```sh
-  npm install vue-tel-input
+  npm install @martinszeltins/vue-tel-input
   ```
 
 - Add the plugin into your app:
 
   ```javascript
   import Vue from 'vue';
-  import VueTelInput from 'vue-tel-input';
-  import 'vue-tel-input/dist/vue-tel-input.css';
+  import VueTelInput from '@martinszeltins/vue-tel-input';
+  import '@martinszeltins/vue-tel-input/dist/vue-tel-input.css';
 
   Vue.use(VueTelInput);
   ```
@@ -57,20 +45,20 @@ International Telephone Input with Vue.
 ### npm
 
 ```bash
-  npm install vue-tel-input
+  npm install @martinszeltins/vue-tel-input
 ```
 
 Install the plugin into Vue:
 
 ```javascript
 import Vue from 'vue';
-import VueTelInput from 'vue-tel-input';
-import 'vue-tel-input/dist/vue-tel-input.css';
+import VueTelInput from '@martinszeltins/vue-tel-input';
+import '@martinszeltins/vue-tel-input/dist/vue-tel-input.css';
 
 Vue.use(VueTelInput, options); // Define default global options here (optional)
 ```
 
-> View all available options in [Props](https://iamstevendao.github.io/vue-tel-input/documentation/props.html).
+> View all available options in [Props](https://github.com/martinszeltins/vue-tel-input).
 
 Or use the component directly:
 
@@ -80,7 +68,7 @@ Or use the component directly:
   <vue-tel-input v-model="value"></vue-tel-input>
 </template>
 <script>
-  import { VueTelInput } from 'vue-tel-input';
+  import { VueTelInput } from '@martinszeltins/vue-tel-input';
 
   export default {
     components: {
@@ -89,14 +77,14 @@ Or use the component directly:
   };
 </script>
 
-<style src="vue-tel-input/dist/vue-tel-input.css"></style>
+<style src="@martinszeltins/vue-tel-input/dist/vue-tel-input.css"></style>
 ```
 
 ### Browser
 
 ```html
-<script src="https://unpkg.com/vue-tel-input"></script>
-<link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css" />
+<script src="https://unpkg.com/@martinszeltins/vue-tel-input"></script>
+<link rel="stylesheet" href="https://unpkg.com/@martinszeltins/vue-tel-input/dist/vue-tel-input.css" />
 ```
 
 **If Vue is detected in the Page, the plugin is installed automatically.**
@@ -164,8 +152,8 @@ Since the library is about 200kb of JavaScript and 100kb of CSS in order to impr
 <script>
   const VueTelInput = () =>
     Promise.all([
-      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input'),
-      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input/dist/vue-tel-input.css'),
+      import(/* webpackChunkName: "chunk-vue-tel-input" */ '@martinszeltins/vue-tel-input'),
+      import(/* webpackChunkName: "chunk-vue-tel-input" */ '@martinszeltins/vue-tel-input/dist/vue-tel-input.css'),
     ]).then(([{ VueTelInput }]) => VueTelInput);
 
   export default {
@@ -183,7 +171,7 @@ As you see, we don't use Vue SFC `<style></style>` tag here to import component'
 Clone the project
 
 ```bash
-  git clone https://github.com/iamstevendao/vue-tel-input.git
+  git clone https://github.com/martinszeltins/vue-tel-input.git
 ```
 
 Go to the project directory
@@ -207,7 +195,6 @@ Start the server
 
 ## License
 
-Copyright (c) 2018 Steven Dao.
-Released under the [MIT License](https://github.com/iamstevendao/vue-tel-input/blob/master/LICENSE).
+Originally by [Steven Dao](https://github.com/iamstevendao). Fork maintained by [Martins Zeltins](https://github.com/martinszeltins).
 
-made with &#x2764; by [Steven](https://github.com/iamstevendao).
+Released under the [MIT License](https://github.com/martinszeltins/vue-tel-input/blob/master/LICENSE).

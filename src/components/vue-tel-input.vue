@@ -189,6 +189,10 @@ export default {
       type: [String, Array, Object],
       default: () => getDefault('styleClasses'),
     },
+    format: {
+      type: String,
+      default: () => getDefault('format'),
+    },
   },
   data() {
     return {
@@ -202,6 +206,7 @@ export default {
       dropdownOpenDirection: 'below',
       parsedPlaceholder: this.inputOptions.placeholder,
       searchQuery: '',
+      internalModelUpdate: false,
     };
   },
   computed: {
@@ -326,6 +331,11 @@ export default {
       this.emitInput(value);
 
       this.$nextTick(() => {
+        // When format prop is set, always update display to the formatted value
+        if (this.format && value) {
+          this.phone = value;
+          return;
+        }
         // In case `v-model` is not set, we need to update the `phone` to be new formatted value
         if (value && !this.value) {
           this.phone = value;
@@ -339,6 +349,14 @@ export default {
       this.resetPlaceholder();
     },
     value(value, oldValue) {
+      if (this.internalModelUpdate) return;
+
+      if (this.format && value) {
+        // Incoming value is in normalized format, set as phone to let autoFormat handle display
+        this.phone = value;
+        return;
+      }
+
       if (!this.testCharacters()) {
         this.$nextTick(() => {
           this.phone = oldValue;
@@ -373,6 +391,14 @@ export default {
           this.phone = `+${this.activeCountryCode}`;
         }
         this.$emit('validate', this.phoneObject);
+        // Normalize v-model and set formatted display for pre-filled values
+        if (this.format && this.phone) {
+          const po = this.phoneObject;
+          if (po.formatted) {
+            this.phone = po.formatted;
+          }
+          this.emitInput(this.phone);
+        }
       })
       .catch(console.error)
       .then(() => {
@@ -547,8 +573,53 @@ export default {
       // and parent wants to return the whole response.
       this.emitInput(this.phone);
     },
+    getFormattedModelValue() {
+      if (!this.format) return undefined;
+      const po = this.phoneObject;
+      // Re-parse to get a PhoneNumber instance with format() method intact
+      let parsed;
+      if (this.phone && this.phone[0] === '+') {
+        parsed = parsePhoneNumberFromString(this.phone);
+      } else {
+        parsed = parsePhoneNumberFromString(this.phone, this.activeCountryCode);
+      }
+
+      // If the number is valid, use the proper format() method
+      if (po.valid && parsed && parsed.isValid()) {
+        try {
+          return parsed.format(this.format.toUpperCase());
+        } catch (e) {
+          // fall through to best-effort below
+        }
+      }
+
+      // For incomplete/invalid numbers, provide best-effort normalization
+      // so the v-model doesn't leak display formatting (spaces, parens, dashes)
+      const fmt = this.format.toLowerCase();
+      if (fmt === 'e.164') {
+        // If the parser could extract something, use its E.164 number property
+        if (parsed && parsed.number) {
+          return parsed.number;
+        }
+        // Otherwise manually strip to just + and digits
+        const digits = this.phone.replace(/[^\d]/g, '');
+        if (this.phone[0] === '+' && digits) {
+          return `+${digits}`;
+        }
+        return digits || undefined;
+      }
+
+      return undefined;
+    },
     emitInput(value) {
-      this.$emit('input', value, this.phoneObject, this.$refs.input);
+      if (this.format) {
+        const normalized = this.getFormattedModelValue();
+        this.internalModelUpdate = true;
+        this.$emit('input', normalized !== undefined ? normalized : value, this.phoneObject, this.$refs.input);
+        this.$nextTick(() => { this.internalModelUpdate = false; });
+      } else {
+        this.$emit('input', value, this.phoneObject, this.$refs.input);
+      }
     },
     onBlur() {
       this.$emit('blur');

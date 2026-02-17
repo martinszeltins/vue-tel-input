@@ -1,16 +1,20 @@
 {
-  "name": "vue-tel-input",
+  "name": "@martinszeltins/vue-tel-input",
   "version": "5.16.0",
   "description": "International Telephone Input with Vue",
-  "author": "Steven Dao <iamstevendao@gmail.com>",
+  "author": "Martins Zeltins",
   "license": "MIT",
-  "homepage": "https://vue-tel-input.iamstevendao.com",
+  "homepage": "https://github.com/martinszeltins/vue-tel-input",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iamstevendao/vue-tel-input.git"
+    "url": "https://github.com/martinszeltins/vue-tel-input.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "vuepress dev docs",
+    "playground": "vite --config playground/vite.config.js",
     "build": "cp .browserslistrc.legacy .browserslistrc && vue-cli-service build --target lib src/index.js --dest dist",
     "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
     "docs:dev": "vuepress dev docs",
@@ -36,6 +40,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",
+    "@vitejs/plugin-vue2": "^2.3.4",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
@@ -48,9 +53,10 @@
     "eslint-plugin-jest": "^24.7.0",
     "eslint-plugin-vue": "^7.20.0",
     "lint-staged": "^11.2.3",
+    "vite": "^7.3.1",
     "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
     "vuepress": "1.8.2",
     "webpack": "^5.1.0"
   },

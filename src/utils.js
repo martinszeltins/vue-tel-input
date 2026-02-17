@@ -282,6 +282,14 @@ export const allProps = [
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
     inDemo: false,
   },
+  {
+    name: 'format',
+    default: null,
+    type: String,
+    description: 'When set, v-model returns the phone number in the specified format (e.g. <code>e.164</code>, <code>international</code>, <code>national</code>) while the input displays the user-friendly formatted number. When not set, v-model returns the display value (original behavior).',
+    inDemo: true,
+    options: [null, 'e.164', 'national', 'international'],
+  },
 ];
 
 export const defaultOptions = [...allProps]

@@ -4,3 +4,4 @@
 /dist-modern/
 /*.js
 /test/unit/coverage/
+/playground/
